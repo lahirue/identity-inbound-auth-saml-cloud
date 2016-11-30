@@ -68,15 +68,6 @@ public class SAMLAuthenticatorConfigs extends AbstractInboundAuthenticatorConfig
         acsurls.setDisplayName("Assertion Consumer URLs");
         acsurls.setDescription("The url where you should redirected after authenticated.");
 
-        Property acsindex = new Property();
-        acsindex.setName(SAMLSSOConstants.SAMLFormFields.ACS_INDEX);
-        acsindex.setDisplayName("Assertion Consumer Service Index");
-        try {
-            acsindex.setValue(Integer.toString(IdentityUtil.getRandomInteger()));
-        } catch (IdentityException e) {
-            log.error("Error occurred when generating attribute consumer service index.", e);
-        }
-
         Property defaultacs = new Property();
         defaultacs.setName(SAMLSSOConstants.SAMLFormFields.DEFAULT_ACS);
         defaultacs.setDisplayName("Default Assertion Consumer URL");
@@ -84,20 +75,24 @@ public class SAMLAuthenticatorConfigs extends AbstractInboundAuthenticatorConfig
         Property nameid = new Property();
         nameid.setName(SAMLSSOConstants.SAMLFormFields.NAME_ID_FORMAT);
         nameid.setDisplayName("NameID format ");
+        nameid.setType("hidden");
 
         Property alias = new Property();
         alias.setName(SAMLSSOConstants.SAMLFormFields.ALIAS);
         alias.setDisplayName("Certificate Alias");
+        alias.setType("hidden");
 
         Property signAlgo = new Property();
         signAlgo.setName(SAMLSSOConstants.SAMLFormFields.SIGN_ALGO);
         signAlgo.setDisplayName("Response Signing Algorithm ");
         signAlgo.setValue("http://www.w3.org/2000/09/xmldsig#rsa-sha1");
+        signAlgo.setType("hidden");
 
         Property digestAlgo = new Property();
         digestAlgo.setName(SAMLSSOConstants.SAMLFormFields.DIGEST_ALGO);
         digestAlgo.setDisplayName("Response Digest Algorithm ");
         digestAlgo.setValue("http://www.w3.org/2000/09/xmldsig#sha1");
+        digestAlgo.setType("hidden");
 
         Property enableSign = new Property();
         enableSign.setName(SAMLSSOConstants.SAMLFormFields.ENABLE_RESPONSE_SIGNING);
@@ -109,6 +104,7 @@ public class SAMLAuthenticatorConfigs extends AbstractInboundAuthenticatorConfig
         enableSigValidation.setDisplayName("Enable Signature Validation in Authentication Requests and Logout " +
                 "Requests");
         enableSigValidation.setValue("false");
+        enableSigValidation.setType("hidden");
 
         Property enableEncAssert = new Property();
         enableEncAssert.setName(SAMLSSOConstants.SAMLFormFields.ENABLE_ASSERTION_ENCRYPTION);
@@ -137,6 +133,18 @@ public class SAMLAuthenticatorConfigs extends AbstractInboundAuthenticatorConfig
         enableDefaultAtrProf.setName(SAMLSSOConstants.SAMLFormFields.ENABLE_DEFAULT_ATTR_PROF);
         enableDefaultAtrProf.setDisplayName("Include Attributes in the Response Always ");
         enableDefaultAtrProf.setValue("false");
+        enableDefaultAtrProf.setType("hidden");
+
+        Property acsindex = new Property();
+        acsindex.setName(SAMLSSOConstants.SAMLFormFields.ACS_INDEX);
+        acsindex.setDisplayName("Assertion Consumer Service Index");
+        try {
+            acsindex.setValue(Integer.toString(IdentityUtil.getRandomInteger()));
+        } catch (IdentityException e) {
+            log.error("Error occurred when generating attribute consumer service index.", e);
+        }
+        acsindex.setType("hidden");
+
 
         Property enableAudienceRestriction = new Property();
         enableAudienceRestriction.setName(SAMLSSOConstants.SAMLFormFields.ENABLE_AUDIENCE_RESTRICTION);
